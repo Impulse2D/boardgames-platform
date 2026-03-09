@@ -1,0 +1,19 @@
+:root {
+    --font-main: "Inter", Arial, sans-serif;
+
+    --color-bg: #f8fafc;
+    --color-text: #0f172a;
+
+    --color-border: #000000;
+    --color-accent-hover-content: #ff0000;
+    --color-accent-header: #16a34a;
+    --color-accent-header-hover: #15803d;
+    --color-border-header: #a7a7a7;
+
+    --container-width: 1200px;
+    --space-section: 60px;
+
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+    --border-radius: 30px;
+    --border-radius-sm: 16px;
+}

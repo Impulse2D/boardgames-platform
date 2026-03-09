@@ -1,0 +1,42 @@
+.main {
+    flex: 1;
+}
+
+.container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 12px;
+    }
+}
+
+.header {
+    padding: 15px 0;
+    border-bottom: 1px solid var(--color-border-header);
+    box-shadow: var(--shadow-sm);
+}
+
+.hero {
+    padding: 30px 0;
+}
+
+.catalog {
+    margin-bottom: 30px;
+}
+
+.catalog__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+
+.footer {
+    background-color: black;
+    padding: 20px 0;
+    border-top: 1px solid var(--color-border-header);
+}
