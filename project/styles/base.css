@@ -29,8 +29,11 @@ ul {
     margin: 0;
 }
 
-button:focus,
-a:focus {
-    outline: 2px solid var(--color-accent);
-    outline-offset: 2px;
+@media (min-width:1280px) {
+
+    button:focus,
+    a:focus {
+        outline: 2px solid var(--color-accent);
+        outline-offset: 2px;
+    }
 }
