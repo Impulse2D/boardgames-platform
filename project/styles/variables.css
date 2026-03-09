@@ -5,6 +5,7 @@
     --color-text: #0f172a;
 
     --color-border: #000000;
+    --color-accent: #15803d;
     --color-accent-hover-content: #ff0000;
     --color-accent-header: #16a34a;
     --color-accent-header-hover: #15803d;
@@ -16,4 +17,7 @@
     --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
     --border-radius: 30px;
     --border-radius-sm: 16px;
+
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.25s ease;
 }

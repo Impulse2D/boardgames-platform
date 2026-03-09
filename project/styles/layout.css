@@ -15,6 +15,11 @@
 }
 
 .header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: var(--color-bg);
+
     padding: 15px 0;
     border-bottom: 1px solid var(--color-border-header);
     box-shadow: var(--shadow-sm);
@@ -30,7 +35,7 @@
 
 .catalog__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 20px;
 }
 
