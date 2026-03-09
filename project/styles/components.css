@@ -41,6 +41,14 @@
     display: none;
 }
 
+.nav--open {
+    display: block;
+}
+
+.burger--active {
+    opacity: 0.8;
+}
+
 .header__user {
     justify-self: end;
     background-color: var(--color-accent-header);
