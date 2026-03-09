@@ -1,6 +1,9 @@
 const burger = document.querySelector(".burger");
 const nav = document.querySelector(".nav");
+const modal = document.querySelector(".modal");
 const headerUser = document.querySelector(".header__user");
+const modalContent = document.querySelector(".modal__content")
+const modal__close = document.querySelector(".modal__close");
 const navLinks = document.querySelectorAll(".nav__link");
 
 if (burger && nav && headerUser) {
@@ -47,4 +50,32 @@ if (burger && nav && headerUser) {
             closeMenu();
         }
     });
+}
+
+if (modal && modalContent && headerUser && modal__close) {
+    function openModal() {
+        modal.classList.add("modal--active");
+    }
+
+    function closeModal() {
+        modal.classList.remove("modal--active");
+    }
+
+    headerUser.addEventListener("click", openModal);
+    modal__close.addEventListener("click", closeModal);
+
+    document.addEventListener("click", function (event) {
+        const isClickOnModalContent = modalContent.contains(event.target);
+        const isClickOnHeaderUser = headerUser.contains(event.target);
+
+        if (!isClickOnModalContent && !isClickOnHeaderUser) {
+            closeModal();
+        }
+    })
+
+    document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+            closeModal();
+        }
+    })
 }
