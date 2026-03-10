@@ -1,3 +1,7 @@
+/* =========================
+   DOM ELEMENTS
+========================= */
+
 const burger = document.querySelector(".burger");
 const nav = document.querySelector(".nav");
 const headerUser = document.querySelector(".header__user");
@@ -7,145 +11,204 @@ const modal = document.querySelector(".modal");
 const modalOverlay = document.querySelector(".modal__overlay");
 const modalCloseButton = document.querySelector(".modal__close");
 const modalForm = document.querySelector(".modal__form");
-
 const emailInput = document.querySelector(".modal__input--email");
 const passwordInput = document.querySelector(".modal__input--password");
 const modalError = document.querySelector(".modal__error");
 
-/* Вспомогательные */
+/* =========================
+   HELPERS
+========================= */
 
 function isKeyEscape(event) {
-    return event.key === "Escape";
+  return event.key === "Escape";
 }
 
 function isMenuOpen() {
-    if (!nav) {
-        return false;
-    }
+  if (!nav) {
+    return false;
+  }
 
-    return nav.classList.contains("nav--open");
+  return nav.classList.contains("nav--open");
 }
-
-/* Открытие-Закрытие */
-
-function openMenu() {
-    if (!burger || !nav || !headerUser) return;
-
-    nav.classList.add("nav--open");
-    headerUser.classList.add("header__user--open");
-    burger.classList.add("burger--active");
-}
-
-function closeMenu() {
-    if (!burger || !nav || !headerUser) return;
-
-    nav.classList.remove("nav--open");
-    headerUser.classList.remove("header__user--open");
-    burger.classList.remove("burger--active");
-}
-
-function openModal() {
-    if (!modal) return;
-
-    closeMenu();
-    resetModalForm();
-    modal.classList.add("modal--active");
-}
-
-function closeModal() {
-    if (!modal) return;
-
-    modal.classList.remove("modal--active");
-    resetModalForm();
-}
-
-/* form helpers */
 
 function clearModalError() {
-    if (!modalError) return;
+  if (!modalError) {
+    return;
+  }
 
-    modalError.textContent = "";
+  modalError.textContent = "";
 }
 
 function resetModalForm() {
-    if (!modalForm || !emailInput || !passwordInput || !modalError) return;
+  if (!modalForm) {
+    return;
+  }
 
-    modalForm.reset();
-    clearModalError();
+  modalForm.reset();
+  clearModalError();
 }
 
-/* Бургер меню */
+/* =========================
+   MENU ACTIONS
+========================= */
+
+function openMenu() {
+  if (!burger || !nav || !headerUser) {
+    return;
+  }
+
+  nav.classList.add("nav--open");
+  headerUser.classList.add("header__user--open");
+  burger.classList.add("burger--active");
+}
+
+function closeMenu() {
+  if (!burger || !nav || !headerUser) {
+    return;
+  }
+
+  nav.classList.remove("nav--open");
+  headerUser.classList.remove("header__user--open");
+  burger.classList.remove("burger--active");
+}
 
 function toggleMenu() {
-    if (isMenuOpen()) {
-        closeMenu();
-    } else {
-        openMenu();
+  if (isMenuOpen()) {
+    closeMenu();
+  } else {
+    openMenu();
+  }
+}
+
+/* =========================
+   MODAL ACTIONS
+========================= */
+
+function openModal() {
+  if (!modal) {
+    return;
+  }
+
+  closeMenu();
+  resetModalForm();
+  modal.classList.add("modal--active");
+}
+
+function closeModal() {
+  if (!modal) {
+    return;
+  }
+
+  modal.classList.remove("modal--active");
+  resetModalForm();
+}
+
+/* =========================
+   FORM ACTIONS
+========================= */
+
+function handleLoginSubmit(event) {
+  if (!emailInput || !passwordInput || !modalError) return;
+
+  event.preventDefault();
+
+  const email = emailInput.value.trim();
+  const password = passwordInput.value.trim();
+
+  clearModalError();
+
+  if (email === "") {
+    modalError.textContent = "Введите email";
+    return;
+  }
+
+  if (password.length < 4) {
+    modalError.textContent = "Пароль должен содержать минимум 4 символа";
+    return;
+  }
+
+  console.log("Login data:", email, password);
+  closeModal();
+}
+
+/* =========================
+   INIT: BURGER MENU
+========================= */
+
+function initBurgerMenu() {
+  if (!burger || !nav || !headerUser) return;
+
+  burger.addEventListener("click", toggleMenu);
+
+  navLinks.forEach(function (link) {
+    link.addEventListener("click", closeMenu);
+  });
+
+  document.addEventListener("click", function (event) {
+    const target = event.target;
+
+    const isClickInsideNav = nav.contains(target);
+    const isClickOnBurger = burger.contains(target);
+    const isClickOnHeaderUser = headerUser.contains(target);
+
+    if (!isClickInsideNav && !isClickOnBurger && !isClickOnHeaderUser) {
+      closeMenu();
     }
+  });
 }
 
-if (burger && nav && headerUser) {
-    burger.addEventListener("click", toggleMenu);
+/* =========================
+   INIT: MODAL
+========================= */
 
-    navLinks.forEach(function (link) {
-        link.addEventListener("click", closeMenu);
-    });
+function initModal() {
+  if (!headerUser || !modalCloseButton || !modalOverlay || !modal) {
+    return;
+  }
 
-    document.addEventListener("click", function (event) {
-        const isClickInsideNav = nav.contains(event.target);
-        const isClickOnBurger = burger.contains(event.target);
-        const isClickOnHeaderUser = headerUser.contains(event.target);
-
-        if (!isClickInsideNav && !isClickOnBurger && !isClickOnHeaderUser) {
-            closeMenu();
-        }
-    });
+  headerUser.addEventListener("click", openModal);
+  modalCloseButton.addEventListener("click", closeModal);
+  modalOverlay.addEventListener("click", closeModal);
 }
 
-/* Модалка */
+/* =========================
+   INIT: LOGIN FORM
+========================= */
 
-if (headerUser && modalCloseButton && modalOverlay) {
-    headerUser.addEventListener("click", openModal);
-    modalCloseButton.addEventListener("click", closeModal);
-    modalOverlay.addEventListener("click", closeModal);
+function initLoginForm() {
+  if (!emailInput || !passwordInput || !modalForm || !modalError) {
+    return;
+  }
+
+  emailInput.addEventListener("input", clearModalError);
+  passwordInput.addEventListener("input", clearModalError);
+  modalForm.addEventListener("submit", handleLoginSubmit);
 }
 
-/* Формы */
+/* =========================
+   INIT: GLOBAL LISTENERS
+========================= */
 
-if (emailInput && passwordInput) {
-    emailInput.addEventListener("input", clearModalError);
-    passwordInput.addEventListener("input", clearModalError);
-}
-
-if (modalForm && emailInput && passwordInput && modalError) {
-    modalForm.addEventListener("submit", function (event) {
-        event.preventDefault();
-
-        const email = emailInput.value.trim();
-        const password = passwordInput.value.trim();
-
-        clearModalError();
-
-        if (email === "") {
-            modalError.textContent = "Введите email";
-            return;
-        }
-
-        if (password.length < 4) {
-            modalError.textContent = "Пароль должен содержать минимум 4 символа";
-            return;
-        }
-
-        console.log("Login data:", email, password);
-        closeModal();
-    });
-}
-
-/* global listeners */
-
-document.addEventListener("keydown", function (event) {
-    if (!isKeyEscape(event)) return;
+function initGlobalListeners() {
+  document.addEventListener("keydown", function (event) {
+    if (!isKeyEscape(event)) {
+      return;
+    }
 
     closeMenu();
     closeModal();
-});
+  });
+}
+
+/* =========================
+   APP INIT
+========================= */
+
+function initApp() {
+  initBurgerMenu();
+  initModal();
+  initLoginForm();
+  initGlobalListeners();
+}
+
+initApp();
