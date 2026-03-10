@@ -261,6 +261,8 @@
 
 .modal {
     display: none;
+    align-items: flex-start;
+    justify-content: center;
     position: fixed;
     inset: 0;
     z-index: 1000;
@@ -325,7 +327,7 @@
 }
 
 .modal--active {
-    display: block;
+    display: flex;
 }
 
 @media (min-width: 768px) {

@@ -2,33 +2,47 @@ const burger = document.querySelector(".burger");
 const nav = document.querySelector(".nav");
 const modal = document.querySelector(".modal");
 const headerUser = document.querySelector(".header__user");
-const modalContent = document.querySelector(".modal__content")
-const modal__close = document.querySelector(".modal__close");
+const modalOverlay = document.querySelector(".modal__overlay");
+const modalCloseButton = document.querySelector(".modal__close");
 const navLinks = document.querySelectorAll(".nav__link");
 
+function isKeyEscape(event) {
+    return event.key === "Escape";
+}
+
+function isMenuOpen() {
+    if (!nav) {
+        return false;
+    }
+
+    return nav.classList.contains("nav--open");
+}
+
+function openMenu() {
+    if (!burger || !nav || !headerUser) return;
+
+    nav.classList.add("nav--open");
+    headerUser.classList.add("header__user--open");
+    burger.classList.add("burger--active");
+}
+
+function closeMenu() {
+    if (!burger || !nav || !headerUser) return;
+
+    nav.classList.remove("nav--open");
+    headerUser.classList.remove("header__user--open");
+    burger.classList.remove("burger--active");
+}
+
+function toggleMenu() {
+    if (isMenuOpen()) {
+        closeMenu();
+    } else {
+        openMenu();
+    }
+}
+
 if (burger && nav && headerUser) {
-    function openMenu() {
-        nav.classList.add("nav--open");
-        headerUser.classList.add("header__user--open");
-        burger.classList.add("burger--active");
-    }
-
-    function closeMenu() {
-        nav.classList.remove("nav--open");
-        headerUser.classList.remove("header__user--open");
-        burger.classList.remove("burger--active");
-    }
-
-    function toggleMenu() {
-        const isMenuOpen = nav.classList.contains("nav--open");
-
-        if (isMenuOpen) {
-            closeMenu();
-        } else {
-            openMenu();
-        }
-    }
-
     burger.addEventListener("click", toggleMenu);
 
     navLinks.forEach(function (link) {
@@ -46,14 +60,15 @@ if (burger && nav && headerUser) {
     });
 
     document.addEventListener("keydown", function (event) {
-        if (event.key === "Escape") {
+        if (isKeyEscape(event)) {
             closeMenu();
         }
     });
 }
 
-if (modal && modalContent && headerUser && modal__close) {
+if (modal && modalOverlay && headerUser && modalCloseButton) {
     function openModal() {
+        closeMenu();
         modal.classList.add("modal--active");
     }
 
@@ -62,20 +77,12 @@ if (modal && modalContent && headerUser && modal__close) {
     }
 
     headerUser.addEventListener("click", openModal);
-    modal__close.addEventListener("click", closeModal);
-
-    document.addEventListener("click", function (event) {
-        const isClickOnModalContent = modalContent.contains(event.target);
-        const isClickOnHeaderUser = headerUser.contains(event.target);
-
-        if (!isClickOnModalContent && !isClickOnHeaderUser) {
-            closeModal();
-        }
-    })
+    modalCloseButton.addEventListener("click", closeModal);
+    modalOverlay.addEventListener("click", closeModal);
 
     document.addEventListener("keydown", function (event) {
-        if (event.key === "Escape") {
+        if (isKeyEscape(event)) {
             closeModal();
         }
-    })
+    });
 }
