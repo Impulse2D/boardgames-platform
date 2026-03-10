@@ -1,10 +1,18 @@
 const burger = document.querySelector(".burger");
 const nav = document.querySelector(".nav");
-const modal = document.querySelector(".modal");
 const headerUser = document.querySelector(".header__user");
+const navLinks = document.querySelectorAll(".nav__link");
+
+const modal = document.querySelector(".modal");
 const modalOverlay = document.querySelector(".modal__overlay");
 const modalCloseButton = document.querySelector(".modal__close");
-const navLinks = document.querySelectorAll(".nav__link");
+const modalForm = document.querySelector(".modal__form");
+
+const emailInput = document.querySelector(".modal__input--email");
+const passwordInput = document.querySelector(".modal__input--password");
+const modalError = document.querySelector(".modal__error");
+
+/* Вспомогательные */
 
 function isKeyEscape(event) {
     return event.key === "Escape";
@@ -17,6 +25,8 @@ function isMenuOpen() {
 
     return nav.classList.contains("nav--open");
 }
+
+/* Открытие-Закрытие */
 
 function openMenu() {
     if (!burger || !nav || !headerUser) return;
@@ -33,6 +43,38 @@ function closeMenu() {
     headerUser.classList.remove("header__user--open");
     burger.classList.remove("burger--active");
 }
+
+function openModal() {
+    if (!modal) return;
+
+    closeMenu();
+    resetModalForm();
+    modal.classList.add("modal--active");
+}
+
+function closeModal() {
+    if (!modal) return;
+
+    modal.classList.remove("modal--active");
+    resetModalForm();
+}
+
+/* form helpers */
+
+function clearModalError() {
+    if (!modalError) return;
+
+    modalError.textContent = "";
+}
+
+function resetModalForm() {
+    if (!modalForm || !emailInput || !passwordInput || !modalError) return;
+
+    modalForm.reset();
+    clearModalError();
+}
+
+/* Бургер меню */
 
 function toggleMenu() {
     if (isMenuOpen()) {
@@ -58,31 +100,52 @@ if (burger && nav && headerUser) {
             closeMenu();
         }
     });
-
-    document.addEventListener("keydown", function (event) {
-        if (isKeyEscape(event)) {
-            closeMenu();
-        }
-    });
 }
 
-if (modal && modalOverlay && headerUser && modalCloseButton) {
-    function openModal() {
-        closeMenu();
-        modal.classList.add("modal--active");
-    }
+/* Модалка */
 
-    function closeModal() {
-        modal.classList.remove("modal--active");
-    }
-
+if (headerUser && modalCloseButton && modalOverlay) {
     headerUser.addEventListener("click", openModal);
     modalCloseButton.addEventListener("click", closeModal);
     modalOverlay.addEventListener("click", closeModal);
+}
 
-    document.addEventListener("keydown", function (event) {
-        if (isKeyEscape(event)) {
-            closeModal();
+/* Формы */
+
+if (emailInput && passwordInput) {
+    emailInput.addEventListener("input", clearModalError);
+    passwordInput.addEventListener("input", clearModalError);
+}
+
+if (modalForm && emailInput && passwordInput && modalError) {
+    modalForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const email = emailInput.value.trim();
+        const password = passwordInput.value.trim();
+
+        clearModalError();
+
+        if (email === "") {
+            modalError.textContent = "Введите email";
+            return;
         }
+
+        if (password.length < 4) {
+            modalError.textContent = "Пароль должен содержать минимум 4 символа";
+            return;
+        }
+
+        console.log("Login data:", email, password);
+        closeModal();
     });
 }
+
+/* global listeners */
+
+document.addEventListener("keydown", function (event) {
+    if (!isKeyEscape(event)) return;
+
+    closeMenu();
+    closeModal();
+});

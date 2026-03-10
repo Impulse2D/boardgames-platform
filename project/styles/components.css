@@ -49,6 +49,11 @@
     transition: background-color 0.3s ease;
 }
 
+.header__user--open {
+    grid-column: 1 / -1;
+    justify-self: center;
+}
+
 .header__login {
     display: inline-block;
     padding: 10px 18px;
@@ -59,6 +64,10 @@
 
 .header__user:hover {
     background-color: var(--color-accent-header-hover);
+}
+
+.burger--active {
+    border: 2px solid var(--color-accent-header);
 }
 
 .nav__list {
@@ -76,15 +85,6 @@
     background-color: #fff;
     border: 1px solid #d9d9d9;
     border-radius: 16px;
-}
-
-.header__user--open {
-    grid-column: 1 / -1;
-    justify-self: center;
-}
-
-.burger--active {
-    border: 2px solid var(--color-accent-header);
 }
 
 .nav__link {
@@ -328,6 +328,14 @@
 
 .modal--active {
     display: flex;
+}
+
+.modal__error {
+    min-height: 20px;
+    margin: 0;
+    color: red;
+    font-size: 14px;
+    text-align: center;
 }
 
 @media (min-width: 768px) {

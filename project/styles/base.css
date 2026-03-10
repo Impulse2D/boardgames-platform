@@ -29,6 +29,7 @@ ul {
     margin: 0;
 }
 
+/*
 @media (min-width:1280px) {
 
     button:focus,
@@ -36,4 +37,4 @@ ul {
         outline: 2px solid var(--color-accent);
         outline-offset: 2px;
     }
-}
+} */
