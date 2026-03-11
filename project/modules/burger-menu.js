@@ -1,64 +1,42 @@
+import { state } from "./state.js";
+
 const burger = document.querySelector(".burger");
 const nav = document.querySelector(".nav");
 const headerUser = document.querySelector(".header__user");
+const menuOverlay = document.querySelector(".menu-overlay");
 const navLinks = document.querySelectorAll(".nav__link");
 
-function isMenuOpen() {
-  if (!nav) {
-    return false;
-  }
+function renderMenu() {
+  nav?.classList.toggle("nav--open", state.isMenuOpen);
+  headerUser?.classList.toggle("header__user--open", state.isMenuOpen);
+  burger?.classList.toggle("burger--active", state.isMenuOpen);
+  menuOverlay?.classList.toggle("menu-overlay--active", state.isMenuOpen);
+}
 
-  return nav.classList.contains("nav--open");
+function setMenu(open) {
+  state.isMenuOpen = open;
+  renderMenu();
 }
 
 export function openMenu() {
-  if (!burger || !nav || !headerUser) {
-    return;
-  }
-
-  nav.classList.add("nav--open");
-  headerUser.classList.add("header__user--open");
-  burger.classList.add("burger--active");
+  setMenu(true);
 }
 
 export function closeMenu() {
-  if (!burger || !nav || !headerUser) {
-    return;
-  }
-
-  nav.classList.remove("nav--open");
-  headerUser.classList.remove("header__user--open");
-  burger.classList.remove("burger--active");
+  setMenu(false);
 }
 
 function toggleMenu() {
-  if (isMenuOpen()) {
-    closeMenu();
-  } else {
-    openMenu();
-  }
+  setMenu(!state.isMenuOpen);
 }
 
 export function initBurgerMenu() {
-  if (!burger || !nav || !headerUser) {
-    return;
-  }
-
-  burger.addEventListener("click", toggleMenu);
+  burger?.addEventListener("click", toggleMenu);
+  menuOverlay?.addEventListener("click", closeMenu);
 
   navLinks.forEach(function (link) {
     link.addEventListener("click", closeMenu);
   });
 
-  document.addEventListener("click", function (event) {
-    const target = event.target;
-
-    const isClickInsideNav = nav.contains(target);
-    const isClickOnBurger = burger.contains(target);
-    const isClickOnHeaderUser = headerUser.contains(target);
-
-    if (!isClickInsideNav && !isClickOnBurger && !isClickOnHeaderUser) {
-      closeMenu();
-    }
-  });
+  renderMenu();
 }

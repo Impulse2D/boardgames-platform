@@ -12,6 +12,19 @@
     letter-spacing: 0.5px;
 }
 
+.menu-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+
+    display: none;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.menu-overlay--active {
+    display: block;
+}
+
 .burger {
     display: flex;
     flex-direction: column;
@@ -265,7 +278,7 @@
     justify-content: center;
     position: fixed;
     inset: 0;
-    z-index: 1000;
+    z-index: 1001;
 }
 
 .modal__overlay {

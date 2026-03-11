@@ -1,4 +1,5 @@
 import { clearModalError, closeModal } from "./modal.js";
+import { state } from "./state.js";
 
 const modalForm = document.querySelector(".modal__form");
 const emailInput = document.querySelector(".modal__input--email");

@@ -1,4 +1,5 @@
 import { closeMenu } from "./burger-menu.js";
+import { state } from "./state.js";
 
 const modal = document.querySelector(".modal");
 const modalOverlay = document.querySelector(".modal__overlay");
@@ -7,48 +8,43 @@ const headerUser = document.querySelector(".header__user");
 const modalForm = document.querySelector(".modal__form");
 const modalError = document.querySelector(".modal__error");
 
-export function clearModalError() {
-  if (!modalError) {
-    return;
-  }
+function renderModal() {
+  modal?.classList.toggle("modal--active", state.isLoginModalOpen);
+}
 
+function setLoginModal(open) {
+  state.isLoginModalOpen = open;
+  renderModal();
+}
+
+export function clearModalError() {
   modalError.textContent = "";
 }
 
 export function resetModalForm() {
-  if (!modalForm) {
-    return;
-  }
+  state.loginForm.email = "";
+  state.loginForm.password = "";
+  state.loginForm.error = "";
 
-  modalForm.reset();
+  modalForm?.reset();
   clearModalError();
 }
 
 export function openModal() {
-  if (!modal) {
-    return;
-  }
-
+  setLoginModal(true);
   closeMenu();
   resetModalForm();
-  modal.classList.add("modal--active");
 }
 
 export function closeModal() {
-  if (!modal) {
-    return;
-  }
-
-  modal.classList.remove("modal--active");
+  setLoginModal(false);
   resetModalForm();
 }
 
 export function initModal() {
-  if (!headerUser || !modalCloseButton || !modalOverlay || !modal) {
-    return;
-  }
+  headerUser?.addEventListener("click", openModal);
+  modalCloseButton?.addEventListener("click", closeModal);
+  modalOverlay?.addEventListener("click", closeModal);
 
-  headerUser.addEventListener("click", openModal);
-  modalCloseButton.addEventListener("click", closeModal);
-  modalOverlay.addEventListener("click", closeModal);
+  renderModal();
 }
