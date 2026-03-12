@@ -131,9 +131,13 @@
 
             <h2 class="modal__title">Вход</h2>
 
-            <form class="modal__form">
-                <input class="modal__input modal__input--email" type="email" placeholder="Email" name="email">
-                <input class="modal__input modal__input--password" type="password" placeholder="Пароль" name="password">
+            <form class="modal__form" autocomplete="off">
+                <input type="text" name="login_email" class="modal__input modal__input--email" inputmode="email"
+                    autocapitalize="none" spellcheck="false" autocomplete="off">
+
+                <input type="password" name="login_password" class="modal__input modal__input--password"
+                    autocomplete="new-password">
+
                 <p class="modal__error"></p>
 
                 <button class="modal__submit" type="submit">Войти</button>

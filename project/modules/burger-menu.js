@@ -18,10 +18,6 @@ function setMenu(open) {
   renderMenu();
 }
 
-export function openMenu() {
-  setMenu(true);
-}
-
 export function closeMenu() {
   setMenu(false);
 }
