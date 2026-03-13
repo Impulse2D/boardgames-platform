@@ -1,3 +1,3 @@
 export function isKeyEscape(event) {
-  return event.key === "Escape";
+  return event.key === "Escape"; 
 }

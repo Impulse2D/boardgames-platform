@@ -5,25 +5,25 @@ const emailInput = document.querySelector(".modal__input--email");
 const passwordInput = document.querySelector(".modal__input--password");
 const modalError = document.querySelector(".modal__error");
 
-function setLoginFormEmail(value) {
+function setLoginFormEmailState(value) {
   state.loginForm.email = value;
 }
 
-function setLoginFormPassword(value) {
+function setLoginFormPasswordState(value) {
   state.loginForm.password = value;
 }
 
-function setLoginFormError(text) {
+function setLoginFormErrorState(text) {
   state.loginForm.error = text;
 }
 
-function renderLoginForm() {
+function renderLoginFormError() {
   if (modalError) {
     modalError.textContent = state.loginForm.error;
   }
 }
 
-function syncLoginFormFields() {
+function renderLoginFormFields() {
   if (emailInput) {
     emailInput.value = state.loginForm.email;
   }
@@ -59,20 +59,20 @@ export function resetLoginForm() {
   state.loginForm.password = "";
   state.loginForm.error = "";
 
-  syncLoginFormFields();
-  renderLoginForm();
+  renderLoginFormFields();
+  renderLoginFormError();
 }
 
 function handleEmailInput(event) {
-  setLoginFormEmail(event.target.value);
-  setLoginFormError("");
-  renderLoginForm();
+  setLoginFormEmailState(event.target.value);
+  setLoginFormErrorState("");
+  renderLoginFormError();
 }
 
 function handlePasswordInput(event) {
-  setLoginFormPassword(event.target.value);
-  setLoginFormError("");
-  renderLoginForm();
+  setLoginFormPasswordState(event.target.value);
+  setLoginFormErrorState("");
+  renderLoginFormError();
 }
 
 export function initLoginForm({ onSuccess } = {}) {
@@ -84,9 +84,9 @@ export function initLoginForm({ onSuccess } = {}) {
 
     const errorText = validateLoginForm();
 
-    setLoginFormError(errorText);
-    syncLoginFormFields();
-    renderLoginForm();
+    setLoginFormErrorState(errorText);
+    renderLoginFormFields();
+    renderLoginFormError();
 
     if (errorText !== "") {
       return;
