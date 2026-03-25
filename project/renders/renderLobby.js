@@ -1,23 +1,36 @@
-import { handleGoToRoom, handleBackToLanding } from "../modules/screen-handlers.js";
-
 export function renderLobby(screenContent, state, renderApp) {
-    screenContent.innerHTML = `
-    <section>
-      <h1>Lobby screen</h1>
-      <button id="go-to-room-button">Go to room</button>
-      <button id="back-to-landing">Back</button>
+  screenContent.innerHTML = `
+    <section class="lobby">
+      <h1 class="lobby__title">Лобби</h1>
+
+      <p class="lobby__subtitle">
+        Выберите режим игры и начните матч.
+      </p>
+
+      <div class="lobby__actions">
+        <button id="quick-match-button" class="lobby__button lobby__button--primary">
+          Быстрая игра
+        </button>
+
+        <button id="bot-button" class="lobby__button lobby__button--secondary">
+          Игра с ботом
+        </button>
+
+        <button class="lobby__button lobby__button--disabled" disabled>
+          Комнаты (скоро)
+        </button>
+      </div>
     </section>
   `;
 
-    const backButton = screenContent.querySelector("#back-to-landing");
+  const quickMatchButton = screenContent.querySelector("#quick-match-button");
+  const botButton = screenContent.querySelector("#bot-button");
 
-    backButton?.addEventListener("click", function () {
-        handleBackToLanding(state, renderApp);
-    });
+  quickMatchButton?.addEventListener("click", () => {
+    console.log("Быстрая игра (заглушка)");
+  });
 
-    const goToRoomButton = screenContent.querySelector("#go-to-room-button");
-
-    goToRoomButton?.addEventListener("click", function () {
-        handleGoToRoom(state, renderApp);
-    });
+  botButton?.addEventListener("click", () => {
+    console.log("Игра с ботом (заглушка)");
+  });
 }
