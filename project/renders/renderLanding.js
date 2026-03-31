@@ -5,20 +5,28 @@ export function renderLanding(screenContent, state, renderApp) {
     <section class="hero">
       <div class="hero__inner">
         <div class="hero__content">
-          <p class="hero__label">Тактическая игра 1 на 1</p>
+          <p class="hero__label">HEX MATCH • STRATEGY</p>
 
-          <h1 class="hero__title">Прорыв: Контроль</h1>
+          <h1 class="hero__title">Линии ресурсов</h1>
 
           <p class="hero__subtitle">
-            Прорывай оборону противника или выталкивай его юниты с поля, чтобы победить.
+            Дуэльная тактическая игра 1 на 1.
+            Строй линии, собирай ресурсы и переиграй соперника за 2 раунда.
           </p>
 
           <div class="hero__actions">
-            <button id="go-to-lobby-button" class="hero__button hero__button--primary">
+            <button
+              type="button"
+              id="go-to-lobby-button"
+              class="hero__button hero__button--primary"
+            >
               Играть
             </button>
 
-            <button type="button" class="hero__button hero__button--secondary">
+            <button
+              type="button"
+              class="hero__button hero__button--secondary"
+            >
               Правила
             </button>
           </div>
@@ -26,36 +34,40 @@ export function renderLanding(screenContent, state, renderApp) {
 
         <div class="hero__visual">
           <div class="hero__preview">
-            <div class="preview-board">
-              <div class="preview-cell"></div>
-              <div class="preview-cell"></div>
-              <div class="preview-cell p2"></div>
-              <div class="preview-cell"></div>
-              <div class="preview-cell"></div>
+            <div class="preview-hex">
+              <div class="preview-row preview-row--top">
+                <div class="preview-cell preview-cell--wood">🌲</div>
+                <div class="preview-cell preview-cell--brick">🧱</div>
+                <div class="preview-cell preview-cell--stone">🪨</div>
+              </div>
 
-              <div class="preview-cell"></div>
-              <div class="preview-cell p2"></div>
-              <div class="preview-cell"></div>
-              <div class="preview-cell p2"></div>
-              <div class="preview-cell"></div>
+              <div class="preview-row preview-row--top">
+                <div class="preview-cell preview-cell--ore">🔩</div>
+                <div class="preview-cell preview-cell--wood">🌲</div>
+                <div class="preview-cell preview-cell--brick">🧱</div>
+                <div class="preview-cell preview-cell--stone">🪨</div>
+              </div>
 
-              <div class="preview-cell"></div>
-              <div class="preview-cell"></div>
-              <div class="preview-cell"></div>
-              <div class="preview-cell"></div>
-              <div class="preview-cell"></div>
+              <div class="preview-row preview-row--center">
+                <div class="preview-cell preview-cell--stone">🪨</div>
+                <div class="preview-cell preview-cell--ore">🔩</div>
+                <div class="preview-cell preview-cell--wood">🌲</div>
+                <div class="preview-cell preview-cell--brick">🧱</div>
+                <div class="preview-cell preview-cell--ore">🔩</div>
+              </div>
 
-              <div class="preview-cell"></div>
-              <div class="preview-cell p1"></div>
-              <div class="preview-cell"></div>
-              <div class="preview-cell p1"></div>
-              <div class="preview-cell"></div>
+              <div class="preview-row preview-row--bottom">
+                <div class="preview-cell preview-cell--wood">🌲</div>
+                <div class="preview-cell preview-cell--brick">🧱</div>
+                <div class="preview-cell preview-cell--stone">🪨</div>
+                <div class="preview-cell preview-cell--ore">🔩</div>
+              </div>
 
-              <div class="preview-cell"></div>
-              <div class="preview-cell"></div>
-              <div class="preview-cell p1"></div>
-              <div class="preview-cell"></div>
-              <div class="preview-cell"></div>
+              <div class="preview-row preview-row--bottom">
+                <div class="preview-cell preview-cell--brick">🧱</div>
+                <div class="preview-cell preview-cell--wood">🌲</div>
+                <div class="preview-cell preview-cell--ore">🔩</div>
+              </div>
             </div>
           </div>
         </div>
