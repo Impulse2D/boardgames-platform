@@ -1,7 +1,7 @@
 import { handleGoToLobby } from "../modules/screen-handlers.js";
 
 export function renderLanding(screenContent, state, renderApp) {
-    screenContent.innerHTML = `
+  screenContent.innerHTML = `
     <section class="hero">
       <div class="hero__inner">
         <div class="hero__content">
@@ -63,14 +63,14 @@ export function renderLanding(screenContent, state, renderApp) {
     </section>
   `;
 
-    const goToLobbyButton = screenContent.querySelector("#go-to-lobby-button");
+  const goToLobbyButton = screenContent.querySelector("#go-to-lobby-button");
 
-    goToLobbyButton?.addEventListener("click", function () {
-        goToLobbyButton.disabled = true;
-        goToLobbyButton.textContent = "Загрузка...";
+  goToLobbyButton?.addEventListener("click", function () {
+    goToLobbyButton.disabled = true;
+    goToLobbyButton.textContent = "Загрузка...";
 
-        setTimeout(function () {
-            handleGoToLobby(state, renderApp);
-        }, 400);
-    });
+    setTimeout(function () {
+      handleGoToLobby(state, renderApp);
+    }, 400);
+  });
 }
