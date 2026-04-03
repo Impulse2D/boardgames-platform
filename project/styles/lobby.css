@@ -1,98 +1,107 @@
-/* =========================
-   LOBBY
-   ========================= */
-
-.lobby {
+.lobby-screen {
+  min-height: calc(100vh - 80px);
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-
-  min-height: 100vh;
-  padding-top: 120px;
-
-  background: linear-gradient(180deg, #0f1724 0%, #162033 100%);
-  color: #fff;
+  justify-content: center;
+  padding: 48px 16px;
 }
 
-.lobby__title {
-  margin-bottom: 32px;
-  font-size: 32px;
-}
-
-.lobby__subtitle {
-  margin: 0 0 28px;
-  color: #cfe3ff;
-  font-size: 18px;
+.lobby-card {
+  width: 100%;
+  max-width: 520px;
+  padding: 40px 32px;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow:
+    0 18px 40px rgba(31, 41, 55, 0.10),
+    0 4px 12px rgba(31, 41, 55, 0.06);
+  border: 1px solid rgba(148, 163, 184, 0.18);
   text-align: center;
+  backdrop-filter: blur(6px);
 }
 
-.lobby__actions {
+.lobby-title {
+  margin: 0 0 12px;
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #1f2937;
+}
+
+.lobby-text {
+  margin: 0 0 28px;
+  font-size: 18px;
+  line-height: 1.5;
+  color: #475569;
+}
+
+.lobby-actions {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-
-  width: 100%;
-  max-width: 320px;
+  gap: 14px;
 }
 
-.lobby__button {
-  padding: 14px 20px;
+.lobby-button {
+  min-height: 56px;
   border: none;
-  border-radius: 12px;
-
-  font-size: 16px;
+  border-radius: 18px;
+  font-size: 18px;
   font-weight: 700;
   cursor: pointer;
-
   transition:
     transform 0.15s ease,
     box-shadow 0.15s ease,
-    opacity 0.15s ease;
+    background-color 0.15s ease,
+    border-color 0.15s ease;
 }
 
-.lobby__button--primary {
-  background: #fff;
-  color: #0f1724;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+.lobby-button:hover {
+  transform: translateY(-1px);
 }
 
-.lobby__button--primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.3);
+.lobby-button-primary {
+  background: linear-gradient(135deg, #34d399, #10b981);
+  color: #ffffff;
+  box-shadow: 0 10px 24px rgba(16, 185, 129, 0.22);
 }
 
-.lobby__button--primary:active {
-  transform: translateY(0);
+.lobby-button-primary:hover {
+  box-shadow: 0 14px 28px rgba(16, 185, 129, 0.28);
 }
 
-.lobby__button--secondary {
-  background: transparent;
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.25);
+.lobby-button-secondary {
+  background: #ffffff;
+  color: #1f2937;
+  border: 1px solid #dbe4ee;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
 }
 
-.lobby__button--secondary:hover {
-  transform: translateY(-2px);
-  border-color: rgba(255, 255, 255, 0.6);
+.lobby-button-secondary:hover {
+  background: #f8fafc;
 }
 
-.lobby__button--secondary:active {
-  transform: translateY(0);
-}
-
-.lobby__button--disabled {
-  background: rgba(255, 255, 255, 0.08);
-  color: rgba(255, 255, 255, 0.4);
+.lobby-button-disabled {
+  background: #e5e7eb;
+  color: #94a3b8;
   cursor: not-allowed;
+  box-shadow: none;
 }
 
-/* =========================
-   ADAPTIVE
-   ========================= */
+.lobby-button-disabled:hover {
+  transform: none;
+}
 
-@media (min-width: 768px) {
-  .lobby {
-    padding-top: 160px;
-  }
+.lobby-back-button {
+  margin-bottom: 16px;
+  align-self: flex-start;
+  background: none;
+  border: none;
+  color: #64748b;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+.lobby-back-button:hover {
+  color: #1f2937;
 }

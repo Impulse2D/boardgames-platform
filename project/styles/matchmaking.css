@@ -1,0 +1,78 @@
+.matchmaking-screen {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 16px;
+}
+
+.matchmaking-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+
+    width: 100%;
+    max-width: 520px;
+    padding: 40px 32px;
+    border-radius: 28px;
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow:
+        0 18px 40px rgba(31, 41, 55, 0.10),
+        0 4px 12px rgba(31, 41, 55, 0.06);
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    text-align: center;
+    backdrop-filter: blur(6px);
+}
+
+.matchmaking-title {
+    margin: 0;
+    font-size: 40px;
+    font-weight: 800;
+    line-height: 1.1;
+    color: #1f2937;
+}
+
+.matchmaking-status {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.5;
+    color: #475569;
+}
+
+.matchmaking-timer {
+    margin: 0 0 12px;
+    font-size: 28px;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.matchmaking-text {
+    margin: 0 0 28px;
+    font-size: 18px;
+    line-height: 1.5;
+    color: #475569;
+}
+
+.matchmaking-button {
+    width: 200px;
+    min-height: 56px;
+    padding: 0 24px;
+    border: 1px solid #dbe4ee;
+    border-radius: 18px;
+    background: #ffffff;
+    color: #1f2937;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease,
+        background-color 0.15s ease;
+}
+
+.matchmaking-button:hover {
+    transform: translateY(-1px);
+    background: #f8fafc;
+}

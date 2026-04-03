@@ -1,0 +1,134 @@
+.room-screen {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 16px;
+}
+
+.room-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+
+    width: 100%;
+    max-width: 640px;
+    padding: 40px 32px;
+    border-radius: 28px;
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow:
+        0 18px 40px rgba(31, 41, 55, 0.10),
+        0 4px 12px rgba(31, 41, 55, 0.06);
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    text-align: center;
+}
+
+.room-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.room-back-button {
+    background: none;
+    border: none;
+    color: #64748b;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 4px 8px;
+    transition: color 0.15s ease;
+}
+
+.room-back-button:hover {
+    color: #1f2937;
+}
+
+.room-title {
+    margin: 0;
+    font-size: 36px;
+    font-weight: 800;
+    line-height: 1.1;
+    color: #1f2937;
+}
+
+.room-players {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
+.room-player-card {
+    width: 100%;
+    max-width: 220px;
+    padding: 18px 20px;
+    border-radius: 20px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+}
+
+.room-player-title {
+    margin: 0 0 6px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.room-player-subtitle {
+    margin: 0;
+    font-size: 14px;
+    color: #64748b;
+}
+
+.room-vs {
+    font-size: 20px;
+    font-weight: 800;
+    color: #64748b;
+}
+
+.room-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.room-status {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.4;
+    color: #475569;
+}
+
+.room-button {
+    min-height: 56px;
+    padding: 0 24px;
+    border: none;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #34d399, #10b981);
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
+    box-shadow: 0 10px 24px rgba(16, 185, 129, 0.22);
+}
+
+.room-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 14px 28px rgba(16, 185, 129, 0.28);
+}
+
+@media (min-width: 768px) {
+    .room-players {
+        flex-direction: row;
+        justify-content: center;
+        gap: 16px;
+    }
+}

@@ -7,7 +7,7 @@ import { state } from "./modules/state.js"
 import { renderScreens } from "./renders/renderScreens.js";
 
 function renderApp() {
-  renderScreens(state, renderApp)
+  renderScreens(state, renderApp);
 }
 
 renderApp();

@@ -1,6 +1,7 @@
 import {
     SCREEN_LANDING,
     SCREEN_LOBBY,
+    SCREEN_MATCHMAKING,
     SCREEN_ROOM,
     SCREEN_GAME,
     SCREEN_RESULT
@@ -13,6 +14,11 @@ export function handleGoToLobby(state, renderApp) {
 
 export function handleBackToLanding(state, renderApp) {
     state.currentScreen = SCREEN_LANDING;
+    renderApp();
+}
+
+export function handleGoToMatchmaking(state, renderApp) {
+    state.currentScreen = SCREEN_MATCHMAKING;
     renderApp();
 }
 

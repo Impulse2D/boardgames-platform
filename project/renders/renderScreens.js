@@ -1,6 +1,7 @@
 import {
     SCREEN_LANDING,
     SCREEN_LOBBY,
+    SCREEN_MATCHMAKING,
     SCREEN_ROOM,
     SCREEN_GAME,
     SCREEN_RESULT
@@ -8,6 +9,7 @@ import {
 
 import { renderLanding } from "./renderLanding.js";
 import { renderLobby } from "./renderLobby.js";
+import { renderMatchmaking } from "./renderMatchmaking.js";
 import { renderRoom } from "./renderRoom.js";
 import { renderGame } from "./renderGame.js";
 import { renderResult } from "./renderResult.js";
@@ -24,6 +26,10 @@ export function renderScreens(state, renderApp) {
 
         case SCREEN_LOBBY:
             renderLobby(screenContent, state, renderApp);
+            break;
+
+        case SCREEN_MATCHMAKING:
+            renderMatchmaking(screenContent, state, renderApp);
             break;
 
         case SCREEN_ROOM:
