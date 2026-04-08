@@ -18,7 +18,8 @@ export const state = {
   match: {
     isStarted: false,
     currentRound: 1,
-    currentTurnPlayer: null
+    currentTurnPlayer: null,
+    startingPlayer: null
   },
 
   loginForm: {

@@ -57,17 +57,27 @@ export function renderRoom(screenContent, state, renderApp) {
   const goToGameButton = screenContent.querySelector("#start-game-button");
   const goToLobbyButton = screenContent.querySelector("#back-to-lobby-button");
 
-  goToGameButton?.addEventListener("click", () => {
-    if (state.areBothPlayersConnected) {
-      state.match.isStarted = true;
-      state.match.currentRound = 1;
-      state.match.currentTurnPlayer = "player1";
+  const isBothPlayersConnected = state.areBothPlayersConnected;
 
-      handleGoToGame(state, renderApp);
-    }
-  });
+  function startMatch(state) {
+    const players = ["player1", "player2"];
+
+    const randomIndex = Math.floor(Math.random() * players.length);
+
+    state.match.isStarted = true;
+    state.match.currentRound = 1;
+    state.match.currentTurnPlayer = players[randomIndex];
+    state.match.startingPlayer = players[randomIndex];
+  }
 
   goToLobbyButton?.addEventListener("click", () => {
     handleGoToLobby(state, renderApp);
+  });
+
+  goToGameButton?.addEventListener("click", () => {
+    if (isBothPlayersConnected) {
+      startMatch(state);
+      handleGoToGame(state, renderApp);
+    }
   });
 }
