@@ -13,9 +13,17 @@ export const state = {
 
   currentScreen: SCREEN_LANDING,
 
+  areBothPlayersConnected: true,
+
+  match: {
+    isStarted: false,
+    currentRound: 1,
+    currentTurnPlayer: null
+  },
+
   loginForm: {
     email: "",
     password: "",
     error: ""
   }
-}
+};

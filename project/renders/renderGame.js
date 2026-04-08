@@ -1,16 +1,38 @@
-import { handleGoToResult } from "../modules/screen-handlers.js";
-
 export function renderGame(screenContent, state, renderApp) {
+    const round = state.match.currentRound;
+    const player = state.match.currentTurnPlayer;
+
+    let playerText = "—";
+
+    if (player === "player1") {
+        playerText = "Игрок 1";
+    } else if (player === "player2") {
+        playerText = "Игрок 2";
+    }
+
     screenContent.innerHTML = `
-    <section>
-        <h1>Game screen</h1>
-        <button id="go-to-result-button">Go to result</button>
-    </section>
+<section>
+    <p>Раунд: ${round}</p>
+    <p>Ход: ${playerText}</p>
+    <button class="turn-button">
+        Передать ход
+    </button>
+</section>
     `;
 
-    const goToResultButton = screenContent.querySelector("#go-to-result-button");
+    const turnButton = screenContent.querySelector(".turn-button");
 
-    goToResultButton?.addEventListener("click", function () {
-        handleGoToResult(state, renderApp);
-    })
+    turnButton.addEventListener("click", () => {
+        if (!state.match.currentTurnPlayer) {
+            return;
+        }
+
+        if (state.match.currentTurnPlayer === "player1") {
+            state.match.currentTurnPlayer = "player2";
+        } else {
+            state.match.currentTurnPlayer = "player1";
+        }
+
+        renderApp();
+    });
 }

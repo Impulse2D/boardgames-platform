@@ -1,6 +1,16 @@
 import { handleGoToGame, handleGoToLobby } from "../modules/screen-handlers.js";
 
 export function renderRoom(screenContent, state, renderApp) {
+  const statusText = state.areBothPlayersConnected
+    ? "Оба игрока в комнате"
+    : "Ожидание второго игрока";
+
+  const hintText = state.areBothPlayersConnected
+    ? "Нажмите «Начать игру», когда будете готовы"
+    : "";
+
+  const isStartButtonDisabled = !state.areBothPlayersConnected;
+
   screenContent.innerHTML = `
     <section class="room-screen">
       <div class="room-card">
@@ -27,9 +37,16 @@ export function renderRoom(screenContent, state, renderApp) {
         </div>
 
         <div class="room-bottom">
-          <p class="room-status">Ожидание начала игры...</p>
+          <div class="status-block">
+            <p class="room-status-text">${statusText}</p>
+            ${hintText ? `<p class="room-status-hint">${hintText}</p>` : ""}
+          </div>
 
-          <button id="start-game-button" class="room-button">
+          <button
+            id="start-game-button"
+            class="room-button"
+            ${isStartButtonDisabled ? "disabled" : ""}
+          >
             Начать игру
           </button>
         </div>
@@ -41,7 +58,13 @@ export function renderRoom(screenContent, state, renderApp) {
   const goToLobbyButton = screenContent.querySelector("#back-to-lobby-button");
 
   goToGameButton?.addEventListener("click", () => {
-    handleGoToGame(state, renderApp);
+    if (state.areBothPlayersConnected) {
+      state.match.isStarted = true;
+      state.match.currentRound = 1;
+      state.match.currentTurnPlayer = "player1";
+
+      handleGoToGame(state, renderApp);
+    }
   });
 
   goToLobbyButton?.addEventListener("click", () => {
