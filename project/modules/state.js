@@ -19,7 +19,8 @@ export const state = {
     isStarted: false,
     currentRound: 1,
     currentTurnPlayer: null,
-    startingPlayer: null
+    startingPlayer: null,
+    movesCount: 0
   },
 
   loginForm: {

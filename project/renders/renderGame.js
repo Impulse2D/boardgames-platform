@@ -1,9 +1,6 @@
 export function renderGame(screenContent, state, renderApp) {
-  const round = state.match.currentRound;
-  const currentPlayer = state.match.currentTurnPlayer;
-  const startingPlayer = state.match.startingPlayer;
-  const isSecondRound = round === 2;
   const maxRoundNumber = 2;
+  const maxMovesCount = 5;
 
   const players = [
     { id: "player1", text: "Игрок 1" },
@@ -32,23 +29,33 @@ export function renderGame(screenContent, state, renderApp) {
 
   screenContent.innerHTML = `
     <section>
-      <p>Раунд: ${round}</p>
-      <p>Ход: ${getPlayerText(currentPlayer)}</p>
-
+      <p>Раунд: ${state.match.currentRound}</p>
+      <p>Ход: ${getPlayerText(state.match.currentTurnPlayer)}</p>
+      <p>Ходов в раунде: ${state.match.movesCount}</p>
       <button class="turn-button">
         Передать ход
-      </button>
-
-      <button class="switch-rounds-button">
-        Начать 2 раунд
       </button>
     </section>
   `;
 
   const turnButton = screenContent.querySelector(".turn-button");
-  const switchRoundsButton = screenContent.querySelector(".switch-rounds-button");
 
-  turnButton?.addEventListener("click", () => {
+  function switchRound() {
+    if (!state.match.startingPlayer || state.match.currentRound === 2) {
+      return;
+    }
+
+    const secondRoundStartingPlayer = getOppositePlayer(state.match.startingPlayer);
+
+    if (!secondRoundStartingPlayer) {
+      return;
+    }
+
+    state.match.currentRound = maxRoundNumber;
+    state.match.currentTurnPlayer = secondRoundStartingPlayer;
+  }
+
+  function turnPlayer() {
     if (!state.match.currentTurnPlayer) {
       return;
     }
@@ -59,25 +66,26 @@ export function renderGame(screenContent, state, renderApp) {
       return;
     }
 
-    state.match.currentTurnPlayer = nextPlayer;
+    state.match.movesCount++;
 
-    renderApp();
-  });
+    const isMaxMovesCount = state.match.movesCount === maxMovesCount;
 
-  switchRoundsButton?.addEventListener("click", () => {
-    if (!startingPlayer || isSecondRound) {
-      return;
+    if (isMaxMovesCount) {
+      state.match.movesCount = 0;
+      if (state.match.currentRound === 1) {
+        switchRound();
+      }
+      else if (state.match.currentRound === 2) {
+        console.log("GoToResult");
+      }
+    } else {
+      state.match.currentTurnPlayer = nextPlayer;
     }
 
-    const secondRoundStartingPlayer = getOppositePlayer(startingPlayer);
-
-    if (!secondRoundStartingPlayer) {
-      return;
-    }
-
-    state.match.currentRound = maxRoundNumber;
-    state.match.currentTurnPlayer = secondRoundStartingPlayer;
-
     renderApp();
+  }
+
+  turnButton?.addEventListener("click", () => {
+    turnPlayer();
   });
 }
